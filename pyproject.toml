@@ -1,0 +1,40 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "testpack"
+version = "0.1.0"
+description = "Plugins for Test Framework"
+authors = [
+    { name = "Michael Daloia", email = "donzeno23@yahoo.com" }
+]
+requires-python = ">=3.11.9"
+dependencies = [
+    "polars",
+    "testplan",
+    "rich"
+]
+
+[project.urls]
+Homepage = "https://github.com/yourusername/testpack"
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+addopts = "-v"
+norecursedirs = ["src/core/test_executor.py", "src/core/test_factory.py"]
+filterwarnings = ["ignore::DeprecationWarning"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src"]
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "pytest-cov",
+]
